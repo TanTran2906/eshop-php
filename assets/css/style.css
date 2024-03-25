@@ -40,7 +40,12 @@ h6 {
     width: 80px;
     height: 80px;
 }
-
+.line {
+    width: 30px;
+    background-color: red;
+    border: 3px solid red;
+    border-radius: 999px;
+}
 /* Navbar  */
 .nav-buttons {
     margin-left: 55%;
@@ -101,7 +106,7 @@ h6 {
     background-size: cover;
 
     background-position-x: 90px;
-    background-position-y: 80px;
+    background-position-y: 120px;
 
     display: flex;
     flex-direction: column;
