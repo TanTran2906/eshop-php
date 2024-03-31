@@ -132,7 +132,7 @@
                     <h4 class="p-price">$
                         <?php echo $row['product_price']; ?>
                     </h4>
-                    <a href="single_product.php?product=<?php echo $row['product_id']; ?>"><button class="buy-btn">Buy
+                    <a href="single_product.php?product_id=<?php echo $row['product_id']; ?>"><button class="buy-btn">Buy
                             Now</button></a>
                 </div>
             <?php } ?>
@@ -179,7 +179,7 @@
                     <h4 class="p-price">$
                         <?php echo $row['product_price']; ?>
                     </h4>
-                    <a href="single_product.php?product=<?php echo $row['product_id']; ?>"><button class="buy-btn">Buy
+                    <a href="single_product.php?product_id=<?php echo $row['product_id']; ?>"><button class="buy-btn">Buy
                             Now</button></a>
                 </div>
 

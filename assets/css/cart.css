@@ -31,14 +31,20 @@
     color: #fb774b;
 }
 .cart .remove-btn {
+    width: 100%;
     color: #fb774b;
     text-decoration: none;
     font-size: 14px;
+    background-color: #fff;
+    border: none;
 }
 .cart .edit-btn {
+    width: 50%;
     color: #fb774b;
     text-decoration: none;
     font-size: 14px;
+    background-color: #fff;
+    border: none;
 }
 .cart .product-info p {
     margin: 3px;
