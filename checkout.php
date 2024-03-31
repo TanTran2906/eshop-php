@@ -4,10 +4,6 @@ session_start(); // Bắt buộc để sử dụng $_SESSION
 // Kiểm tra nếu $_SESSION['total'] tồn tại và không rỗng trước khi sử dụng nó
 if (isset($_SESSION['total']) && !empty($_SESSION['total'])) {
     $total = $_SESSION['total']; // Lấy giá trị total từ session
-    // Sử dụng $total ở đây hoặc thực hiện các xử lý khác cần thiết
-    echo "Total amount: $" . $total; // Ví dụ: hiển thị tổng số tiền
-} else {
-    echo "Total amount is not available."; // Hiển thị thông báo nếu total không tồn tại hoặc rỗng
 }
 ?>
 
@@ -63,14 +59,14 @@ if (isset($_SESSION['total']) && !empty($_SESSION['total'])) {
         </div>
     </nav>
 
-    <!-- Register  -->
+    <!-- Checkout  -->
     <section class="my-5 py-5">
         <div class="container text-center mt-3 pt-5">
             <h2 class="form-weight-bold">Checkout</h2>
             <hr class="mx-auto line" />
         </div>
         <div class="mx-auto container">
-            <form id="checkout-form" method="POST" action="place_order.php">
+            <form id="checkout-form" method="POST" action="server/place_order.php">
                 <div class="form-group checkout-small-element">
                     <label>Name</label>
                     <input type="text" class="form-control" id="checkout-name" name="name" placeholder="Name" />
@@ -81,7 +77,8 @@ if (isset($_SESSION['total']) && !empty($_SESSION['total'])) {
                 </div>
                 <div class="form-group checkout-small-element">
                     <label>Phone</label>
-                    <input type="tel" class="form-control" id="checkout-phone" name="phone" placeholder="Phone" />
+                    <input type="tel" class="form-control" id="checkout-phone" name="phone" placeholder="Phone"
+                        required />
                 </div>
                 <div class="form-group checkout-small-element">
                     <label>City</label>
@@ -89,8 +86,8 @@ if (isset($_SESSION['total']) && !empty($_SESSION['total'])) {
                 </div>
                 <div class="form-group checkout-large-element">
                     <label>Address</label>
-                    <input type="text" class="form-control" id="checkout-address" name="address"
-                        placeholder="Address" />
+                    <input type="text" class="form-control" id="checkout-address" name="address" placeholder="Address"
+                        required />
                 </div>
 
                 <div class="form-group checkout-btn-container">

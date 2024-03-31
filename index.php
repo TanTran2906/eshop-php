@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse nav-buttons" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
 
                     <li class="nav-item">
@@ -41,7 +41,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+                        <a href="cart.php"><i class="fa-solid fa-bag-shopping"></i></a>
                         <a href="account.html"><i class="fa-solid fa-user"></i></a>
                     </li>
                 </ul>
