@@ -91,7 +91,7 @@ if (isset($_SESSION['logged_in'])) {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.html">Shop</a>
+                        <a class="nav-link" href="shop.php">Shop</a>
                     </li>
 
                     <li class="nav-item">
@@ -99,12 +99,12 @@ if (isset($_SESSION['logged_in'])) {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact us</a>
+                        <a class="nav-link" href="contact.php">Contact us</a>
                     </li>
 
                     <li class="nav-item">
                         <a href="cart.php"><i class="fa-solid fa-bag-shopping"></i></a>
-                        <a href="account.html"><i class="fa-solid fa-user"></i></a>
+                        <a href="account.php"><i class="fa-solid fa-user"></i></a>
                     </li>
                 </ul>
             </div>
@@ -128,12 +128,12 @@ if (isset($_SESSION['logged_in'])) {
                 <h3 class="font-weight-bold">Account info</h3>
                 <hr class="mx-auto line" />
                 <div class="account-info">
-                    <p>Name<span>
+                    <p>Name: <span>
                             <?php if ($_SESSION["user_name"]) {
                                 echo $_SESSION["user_name"];
                             } ?>
                         </span></p>
-                    <p>Email<span>
+                    <p>Email: <span>
                             <?php if ($_SESSION["user_email"]) {
                                 echo $_SESSION["user_email"];
                             } ?>
@@ -222,6 +222,7 @@ if (isset($_SESSION['logged_in'])) {
 
                     <td>
                         <form method="POST" action="order_details.php">
+                            <input type="hidden" name="order_status" value="<?php echo $row["order_status"]; ?>" />
                             <input type="hidden" name="order_id" value="<?php echo $row["order_id"]; ?>" />
                             <input type="submit" class="btn order-details-btn" name="order_details_btn" value="details" />
                         </form>
@@ -231,78 +232,7 @@ if (isset($_SESSION['logged_in'])) {
         </table>
     </section>
 
-    <!--Footer -->
-    <footer class="mt-5 py-5">
-        <div class="row container mx-auto pt-5">
-            <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                <img class="logo" src="./assets/img/logo.png" />
-                <p class="pt-3">
-                    We provide the best products for the most affordable
-                    prices
-                </p>
-            </div>
-            <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                <h5 class="pb-2">Featured</h5>
-                <ul class="text-uppercase">
-                    <li><a href="#">men</a></li>
-                    <li><a href="#">women</a></li>
-                    <li><a href="#">boys</a></li>
-                    <li><a href="#">girls</a></li>
-                    <li><a href="#">new arrivals</a></li>
-                    <li><a href="#">clothes</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                <h5 class="pb-2">Contact Us</h5>
-                <div>
-                    <h6 class="text-uppercase">Address</h6>
-                    <p>1234 Street Name, City</p>
-                </div>
-                <div>
-                    <h6 class="text-uppercase">Phone</h6>
-                    <p>123 456 7890</p>
-                </div>
-                <div>
-                    <h6 class="text-uppercase">Email</h6>
-                    <p>info@email.com</p>
-                </div>
-            </div>
-
-            <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                <h5 class="pb-2">Instagram</h5>
-                <div class="row">
-                    <img src="assets/img/featured1.jpg" class="img-fluid w-25 h-100 m-2" />
-                    <img src="assets/img/featured2.jpg" class="img-fluid w-25 h-100 m-2" />
-                    <img src="assets/img/featured3.jpg" class="img-fluid w-25 h-100 m-2" />
-                    <img src="assets/img/featured4.jpg" class="img-fluid w-25 h-100 m-2" />
-                    <img src="assets/img/dell1.jpg" class="img-fluid w-25 h-100 m-2" />
-                </div>
-            </div>
-
-            <div class="copyright mt-5">
-                <div class="row container mx-auto">
-                    <div class="col-lg-3 col-md-5 col-sm-12 mb-4">
-                        <img src="assets/img/payment.jpg" />
-                    </div>
-                    <div class="col-lg-3 col-md-5 col-sm-12 mb-4 text-nowrap mb-2">
-                        <p>eCommerce @2024 All Right Reserved</p>
-                    </div>
-                    <div class="col-lg-3 col-md-5 col-sm-12 mb-4">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- <Script> -->
-    <script src="https://kit.fontawesome.com/5d5834f6a4.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <?php include ("layouts/footer.php") ?>
 </body>
 
 </html>

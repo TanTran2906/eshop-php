@@ -4,6 +4,18 @@
     box-sizing: border-box;
     object-fit: cover;
 }
+#featured .buy-btn {
+    background-color: #fb774b;
+    opacity: 1;
+    transition: 0.4s all;
+}
+#featured .buy-btn{
+    text-decoration: none;
+    color: #fff;
+}
+#featured .buy-btn:hover {
+    background-color: #222222;
+}
 .pagination a {
     color: coral;
 }
@@ -11,3 +23,8 @@
     color: #fff;
     background-color: coral;
 }
+/* #search{
+    position: fixed;
+    left: 0;
+    top: -50px;
+} */

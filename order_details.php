@@ -2,26 +2,19 @@
 session_start();
 include ('server/connection.php');
 
-// $order_id = $_POST['order_id'];
+$order_id = $_POST['order_id'];
+$order_status = $_POST['order_status'];
+
 // echo '<script>console.log(' . json_encode($order_id) . ');</script>'; // In giá trị của 'order_id' lên console
 
-if (isset($_POST['order_id]'])) {
-    $order_id = $_POST['order_id'];
-    echo '<script>console.log(' . json_encode($order_id) . ');</script>'; // In giá trị của 'order_id' lên console
+// Sử dụng order_id để truy vấn cơ sở dữ liệu
+$stmt = $conn->prepare("SELECT * FROM order_items WHERE order_id = ?");
+$stmt->bind_param('i', $order_id);
+$stmt->execute();
 
-    $stmt = $conn->prepare("SELECT * FROM order_items WHERE order_id = ?");
-    $stmt->bind_param('i', $order_id);
-    $stmt->execute();
+// Lấy kết quả của truy vấn
+$order_details = $stmt->get_result();
 
-    $order_details = $stmt->get_result(); //[]
-
-    echo '<script>console.log(' . json_encode($order_details) . ');</script>'; // In giá trị của 'order_id' lên console
-
-}
-// else {
-//     header('location: account.php');
-//     exit;
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +48,7 @@ if (isset($_POST['order_id]'])) {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.html">Shop</a>
+                        <a class="nav-link" href="shop.php">Shop</a>
                     </li>
 
                     <li class="nav-item">
@@ -63,12 +56,12 @@ if (isset($_POST['order_id]'])) {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact us</a>
+                        <a class="nav-link" href="contact.php">Contact us</a>
                     </li>
 
                     <li class="nav-item">
                         <a href="cart.php"><i class="fa-solid fa-bag-shopping"></i></a>
-                        <a href="account.html"><i class="fa-solid fa-user"></i></a>
+                        <a href="account.php"><i class="fa-solid fa-user"></i></a>
                     </li>
                 </ul>
             </div>
@@ -77,86 +70,56 @@ if (isset($_POST['order_id]'])) {
 
     <!-- Order details  -->
     <section id="orders" class="orders container my-5 py-3">
-        <div class="container mt-5">
+        <div class="container mt-5 pt-5">
             <h2 class="font-weight-bolde text-center">Order details</h2>
             <hr class="mx-auto line" />
         </div>
 
         <!-- Table  -->
+        <table class="mt-5 pt-5 mx-auto">
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quanity</th>
+            </tr>
+            <?php while ($row = $order_details->fetch_assoc()) { ?>
+                <tr>
+                    <td>
+                        <div class="product-info">
+                            <img src="assets/img/<?php echo $row["product_image"]; ?>" />
+                            <div>
+                                <p class="mt-3">
+                                    <?php echo $row["product_name"]; ?>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span>
+                            $
+                            <?php echo $row["product_price"]; ?>
+                        </span>
+                    </td>
+
+                    <td>
+                        <span>
+                            <?php echo $row["product_quantity"]; ?>
+                        </span>
+                    </td>
+
+                </tr>
+            <?php } ?>
+        </table>
+
+        <?php if ($order_status == "not paid") { ?>
+            <form style="float: right;">
+                <input type="submit" class="btn btn-primary" value="Pay Now" />
+            </form>
+        <?php } ?>
+
     </section>
 
-    <!--Footer -->
-    <footer class="mt-5 py-5">
-        <div class="row container mx-auto pt-5">
-            <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                <img class="logo" src="./assets/img/logo.png" />
-                <p class="pt-3">
-                    We provide the best products for the most affordable
-                    prices
-                </p>
-            </div>
-            <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                <h5 class="pb-2">Featured</h5>
-                <ul class="text-uppercase">
-                    <li><a href="#">men</a></li>
-                    <li><a href="#">women</a></li>
-                    <li><a href="#">boys</a></li>
-                    <li><a href="#">girls</a></li>
-                    <li><a href="#">new arrivals</a></li>
-                    <li><a href="#">clothes</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                <h5 class="pb-2">Contact Us</h5>
-                <div>
-                    <h6 class="text-uppercase">Address</h6>
-                    <p>1234 Street Name, City</p>
-                </div>
-                <div>
-                    <h6 class="text-uppercase">Phone</h6>
-                    <p>123 456 7890</p>
-                </div>
-                <div>
-                    <h6 class="text-uppercase">Email</h6>
-                    <p>info@email.com</p>
-                </div>
-            </div>
-
-            <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                <h5 class="pb-2">Instagram</h5>
-                <div class="row">
-                    <img src="assets/img/featured1.jpg" class="img-fluid w-25 h-100 m-2" />
-                    <img src="assets/img/featured2.jpg" class="img-fluid w-25 h-100 m-2" />
-                    <img src="assets/img/featured3.jpg" class="img-fluid w-25 h-100 m-2" />
-                    <img src="assets/img/featured4.jpg" class="img-fluid w-25 h-100 m-2" />
-                    <img src="assets/img/dell1.jpg" class="img-fluid w-25 h-100 m-2" />
-                </div>
-            </div>
-
-            <div class="copyright mt-5">
-                <div class="row container mx-auto">
-                    <div class="col-lg-3 col-md-5 col-sm-12 mb-4">
-                        <img src="assets/img/payment.jpg" />
-                    </div>
-                    <div class="col-lg-3 col-md-5 col-sm-12 mb-4 text-nowrap mb-2">
-                        <p>eCommerce @2024 All Right Reserved</p>
-                    </div>
-                    <div class="col-lg-3 col-md-5 col-sm-12 mb-4">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- <Script> -->
-    <script src="https://kit.fontawesome.com/5d5834f6a4.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <?php include ("layouts/footer.php") ?>
 </body>
 
 </html>

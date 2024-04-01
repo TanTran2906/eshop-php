@@ -1,21 +1,15 @@
-<?php
-session_start(); // Bắt buộc để sử dụng $_SESSION
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Payment</title>
+    <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="./assets/css/checkout.css" />
+    <link rel="stylesheet" href="./assets/css/contact.css" />
 </head>
 
 <body>
@@ -56,36 +50,24 @@ session_start(); // Bắt buộc để sử dụng $_SESSION
         </div>
     </nav>
 
-    <!-- Payment  -->
-    <section class="my-5 py-5">
-        <div class="container text-center mt-3 pt-5">
-            <h2 class="form-weight-bold">Payment</h2>
+    <!-- Contact  -->
+    <section id="contact" class="container my-5 py-5">
+        <div class="container text-center mt-7">
+            <h3>Contact us</h3>
             <hr class="mx-auto line" />
-        </div>
-        <div class="mx-auto container text-center">
-            <p>
-                <?php if (isset($_GET['order_status']))
-                    echo $_GET['order_status']; ?>
+            <p class="w-50 mx-auto">
+                Phone number: <span>123 456 789</span>
             </p>
-            <p>Total payment: $
-                <?php if (isset($_SESSION['total']))
-                    echo $_SESSION['total']; ?>
+            <p class="w-50 mx-auto">
+                Email address: <span>info@email.com</span>
             </p>
-            <?php if (isset($_SESSION['total'])) {
-                ?>
-                <input class="btn btn-primary" type="submit" value="Pay Now" />
-            <?php } ?>
-            <?php if (isset($_GET['order_status']) && $_GET['order_status'] == "not paid") {
-                ?>
-                <input class="btn btn-primary" type="submit" value="Pay Now" />
-            <?php } ?>
-        </div>
-        <div class="mx-auto container">
 
+            <p class="w-50 mx-auto">
+                We work 24/7 to answer your questions
+            </p>
         </div>
     </section>
 
-    <!--Footer -->
     <?php include ("layouts/footer.php") ?>
 </body>
 

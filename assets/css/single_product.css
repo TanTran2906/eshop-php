@@ -13,7 +13,7 @@
     font-size: 16px;
     margin-right: 10px;
 }
-.single-productinput:focus {
+.single-product input:focus {
     outline: none;
 }
 .single-product .buy-btn {
