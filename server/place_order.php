@@ -14,7 +14,7 @@ if (isset($_POST['place_order'])) {
     $address = $_POST['address'];
     $order_cost = $_SESSION['total'];
     $order_status = "on_hold";
-    $user_id = 1; //TEST
+    $user_id = $_SESSION['user_id'];
     $order_date = date('Y-m-d H:i:s');
 
     //statement(stmt), kỹ thuật ?: chống tin tặc tấn công / SQL injection
@@ -48,6 +48,6 @@ if (isset($_POST['place_order'])) {
     //unset ($_SESSION ['cart']);
 
     //6. inform user whether everything is fine or there is a problem
-    header('location: payment.php?order_status="order placed successfull!"');
+    header('location: ../payment.php?order_status=Order placed successfull!');
 }
 ?>
