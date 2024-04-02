@@ -2,6 +2,13 @@
 session_start(); // Bắt buộc để sử dụng $_SESSION
 
 
+$order_status = $_POST['order_status'];
+$order_total_price = $_POST['order_total_price'];
+$order_id = $_POST['order_id'];
+
+// echo '<script>console.log(' . json_encode($order_total_price) . ');</script>'; // In giá trị của 'order_id' lên console
+
+
 ?>
 
 <!DOCTYPE html>
@@ -63,30 +70,72 @@ session_start(); // Bắt buộc để sử dụng $_SESSION
             <hr class="mx-auto line" />
         </div>
         <div class="mx-auto container text-center">
-            <p>
-                <?php if (isset($_GET['order_status']))
-                    echo $_GET['order_status']; ?>
-            </p>
-            <p>Total payment: $
-                <?php if (isset($_SESSION['total']))
-                    echo $_SESSION['total']; ?>
-            </p>
-            <?php if (isset($_SESSION['total'])) {
-                ?>
-                <input class="btn btn-primary" type="submit" value="Pay Now" />
+
+            <?php if (isset($_POST['order_status']) && $_POST['order_status'] === "not paid") { ?>
+                <?php $amount = $_POST['order_total_price']; ?>
+                <?php $order_id = $_POST['order_id']; ?>
+                <p>Total payment: $
+                    <?php echo $_POST['order_total_price']; ?>
+                </p>
+                <!-- <input class="btn btn-primary" type="submit" value="Pay Now" /> -->
+                <!-- Paypal Button  -->
+                <div class="mx-auto pt-5" style="width: 50%;">
+                    <div id="paypal-button-container" class="mx-auto"></div>
+
+                </div>
+
+            <?php } else if (isset($_SESSION['total']) && $_SESSION['total'] != 0) { ?>
+                <?php $amount = $_SESSION['total']; ?>
+                <?php $order_id = $_SESSION['order_id']; ?>
+                    <p>Total payment: $
+                    <?php echo $_SESSION['total']; ?>
+                    </p>
+                    <!-- <input class="btn btn-primary" type="submit" value="Pay Now" /> -->
+                    <!-- Paypal Button  -->
+                    <div class="mx-auto pt-5" style="width: 50%;">
+                        <div id="paypal-button-container" class="mx-auto"></div>
+                    </div>
+
+            <?php } else { ?>
+                    <p>You don't have an order</p>
             <?php } ?>
-            <?php if (isset($_GET['order_status']) && $_GET['order_status'] == "not paid") {
-                ?>
-                <input class="btn btn-primary" type="submit" value="Pay Now" />
-            <?php } ?>
-        </div>
-        <div class="mx-auto container">
+
 
         </div>
     </section>
 
     <!--Footer -->
     <?php include ("layouts/footer.php") ?>
+
+    <p id="result-message"></p>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AYygUvI39mhhnT9q9DWtoma6_YZQ6zvyVkhz12r3dwyKo4glNtlPNXSCTb_pAl52pO4Q0XqGCCPS7-yT&currency=USD">
+        </script>
+    <script>
+        window.paypal.Buttons({
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '<?php echo $amount; ?>'
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (orderData) {
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                    window.location.href = "server/complete_payment.php?transaction_id=" + transaction.id + "&order_id=" + <?php echo $order_id; ?>;
+                });
+            }
+        }).render("#paypal-button-container");
+    </script>
+    <!-- <script src="app.js">
+        window.paypal.Buttons({}).render("#paypal-button-container");
+    </script> -->
 </body>
 
 </html>

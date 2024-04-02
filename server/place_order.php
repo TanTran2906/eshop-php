@@ -60,6 +60,8 @@ else {
         //5. remove eveything from cart -- > delay until payment is done
         //unset ($_SESSION ['cart']);
 
+        $_SESSION['order_id'] = $order_id;
+
         //6. inform user whether everything is fine or there is a problem
         header('location: ../payment.php?order_status=Order placed successfull!');
     }

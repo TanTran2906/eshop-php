@@ -2,6 +2,12 @@
 
 session_start();
 
+// Kiểm tra nếu mảng 'cart' chưa tồn tại hoặc là null
+if (!isset($_SESSION['cart']) || $_SESSION['cart'] === null) {
+    // Khởi tạo mảng 'cart' là một mảng trống
+    $_SESSION['cart'] = [];
+}
+
 if (isset($_POST['add_to_cart'])) {
 
     //if user has already added a product to cart
