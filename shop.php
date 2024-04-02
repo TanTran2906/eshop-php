@@ -7,6 +7,8 @@ $stmt->execute();
 
 $products = $stmt->get_result();//[]
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -156,7 +158,7 @@ $products = $stmt->get_result();//[]
             <?php } ?>
 
             <!-- Pagination bar -->
-            <nav aria-label="Page navigation example">
+            <!-- <nav aria-label="Page navigation example">
                 <ul class="pagination pagination-sm mt-5">
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">
@@ -180,7 +182,7 @@ $products = $stmt->get_result();//[]
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
         </div>
     </section>
 
