@@ -59,19 +59,20 @@ if (isset($_GET['product_id'])) {
                 <div class="row">
                     <form id="edit-form" method="POST" action="editproduct.php">
                         <?php foreach ($products as $product) { ?>
-                            <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>" />
+                            <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>" required />
                             <!-- Name  -->
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Title</label>
-                                    <input type="text" value="<?php echo $product['product_name']; ?>" name="title">
+                                    <input type="text" value="<?php echo $product['product_name']; ?>" name="title"
+                                        required>
                                 </div>
                             </div>
                             <!-- Category -->
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Category</label>
-                                    <select class="select" name="category">
+                                    <select class="select" name="category" required>
                                         <option>DELL</option>
                                         <option>ASUS</option>
                                         <option>HP</option>
@@ -83,14 +84,16 @@ if (isset($_GET['product_id'])) {
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Price</label>
-                                    <input type="text" name="price" value="<?php echo $product['product_price']; ?>">
+                                    <input type="text" name="price" value="<?php echo $product['product_price']; ?>"
+                                        required>
                                 </div>
                             </div>
                             <!-- Color -->
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Color</label>
-                                    <input type="text" name="color" value="<?php echo $product['product_color']; ?>">
+                                    <input type="text" name="color" value="<?php echo $product['product_color']; ?>"
+                                        required>
                                 </div>
                             </div>
                             <!-- Special offer/Sales -->
@@ -98,14 +101,14 @@ if (isset($_GET['product_id'])) {
                                 <div class="form-group">
                                     <label>Special offer/Sales</label>
                                     <input type="number" name="offer"
-                                        value="<?php echo $product['product_special_offer']; ?>">
+                                        value="<?php echo $product['product_special_offer']; ?>" required>
                                 </div>
                             </div>
                             <!-- Description -->
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea class="form-control"
+                                    <textarea class="form-control" required
                                         name="description"><?php echo $product['product_description']; ?></textarea>
                                 </div>
                             </div>

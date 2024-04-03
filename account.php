@@ -57,6 +57,17 @@ if (isset($_SESSION['logged_in'])) {
     $orders = $stmt->get_result();//[]
 }
 
+// Funtion 
+// if (isset($_SESSION['logged_in'])) {
+//     $user_id = $_SESSION['user_id'];
+
+//     $stmt = $conn->prepare("SELECT order_id,order_cost, user_id, user_phone FROM orders WHERE user_id =? ");
+//     $stmt->bind_param('i', $user_id);
+//     $stmt->execute();
+
+//     $orders = $stmt->get_result();//[]
+// }
+
 ?>
 
 <!DOCTYPE html>

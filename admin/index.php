@@ -19,6 +19,17 @@ $orders = $stmt->get_result();//[]
 <!-- Content  -->
 <div class="page-wrapper">
     <div class="content">
+        <?php if (isset($_GET['edit_success_message'])) { ?>
+            <p class="text-center" style="color: green;">
+                <?php echo $_GET['edit_success_message']; ?>
+            </p>
+        <?php } ?>
+
+        <?php if (isset($_GET['edit_failure_message'])) { ?>
+            <p class="text-center" style="color: red; ">
+                <?php echo $_GET['edit_failure_message']; ?>
+            </p>
+        <?php } ?>
 
         <div class="table-responsive">
             <table class="table datanew">
@@ -63,9 +74,9 @@ $orders = $stmt->get_result();//[]
                                 <a class="me-3" href="editorder.php?order_id=<?php echo $order['order_id']; ?>">
                                     <img src="assets/img/icons/edit.svg" alt="img">
                                 </a>
-                                <a class="confirm-text" href="javascript:void(0);">
+                                <!-- <a class="confirm-text" href="javascript:void(0);">
                                     <img src="assets/img/icons/delete.svg" alt="img">
-                                </a>
+                                </a> -->
                             </td>
 
                         </tr>

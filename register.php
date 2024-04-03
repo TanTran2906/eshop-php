@@ -41,7 +41,8 @@ if (isset($_POST['register'])) {
         } else {
             // Tạo người dùng mới
             $hashedPassword = md5($password);
-            $stmt = $conn->prepare("INSERT INTO users (user_name, user_email,user_password) VALUES (?,?,?)");
+            //$stmt = $conn->prepare("INSERT INTO users (user_name, user_email,user_password) VALUES (?,?,?)");
+            $stmt = $conn->prepare("CALL register(?,?,?)");
             $stmt->bind_param('sss', $name, $email, $hashedPassword);
 
             //if account was created successfully

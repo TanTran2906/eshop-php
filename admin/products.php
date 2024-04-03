@@ -21,6 +21,18 @@ $products = $stmt->get_result();//[]
     <div class="content">
 
         <h2>Products</h2>
+        <?php if (isset($_GET['product_created'])) { ?>
+            <p class="text-center" style="color: green;">
+                <?php echo $_GET['product_created']; ?>
+            </p>
+        <?php } ?>
+
+        <?php if (isset($_GET['product_failed'])) { ?>
+            <p class="text-center" style="color: red; ">
+                <?php echo $_GET['product_failed']; ?>
+            </p>
+        <?php } ?>
+
         <?php if (isset($_GET['edit_success_message'])) { ?>
             <p class="text-center" style="color: green;">
                 <?php echo $_GET['edit_success_message']; ?>

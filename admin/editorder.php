@@ -17,6 +17,20 @@ if (isset($_GET['order_id'])) {
 
     $order = $stmt->get_result(); //[]
 
+} else if (isset($_POST['edit_btn'])) {
+    $order_id = $_POST['order_id'];
+    $status = $_POST['status'];
+
+    $stmt = $conn->prepare("UPDATE orders SET order_status = ? WHERE order_id = ?");
+    $stmt->bind_param('si', $status, $order_id);
+    $stmt->execute();
+
+    if ($stmt->execute()) {
+        header('location: index.php?edit_success_message=Order has been updated successfully!');
+    } else {
+        header('location: index.php?edit_failure_message=Error occured, try again!');
+    }
+
 } else {
     header('location: index.php');
     exit;
@@ -64,10 +78,15 @@ if (isset($_GET['order_id'])) {
                                 <div class="form-group">
                                     <label>Order Status: </label>
                                     <select class="select" name="status">
-                                        <option>Not paid</option>
-                                        <option>Paid</option>
-                                        <option>Shipped</option>
-                                        <option>Delivered</option>
+                                        <option value="not paid" <?php if ($r['order_status'] == "not paid")
+                                            echo "selected"; ?>>not paid</option>
+                                        <option value="paid" <?php if ($r['order_status'] == "paid")
+                                            echo "selected"; ?>>paid
+                                        </option>
+                                        <option value="shipped" <?php if ($r['order_status'] == "shipped")
+                                            echo "selected"; ?>>shipped</option>
+                                        <option value="delivered" <?php if ($r['order_status'] == "delivered")
+                                            echo "selected"; ?>>delivered</option>
                                     </select>
                                 </div>
                             </div>

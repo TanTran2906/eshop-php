@@ -16,6 +16,13 @@
                     </a>
                 </li>
 
+                <!-- Add Product  -->
+                <li class="active">
+                    <a href="add_product.php"><img src="assets/img/icons/product.svg" alt="img" /><span>
+                            Add Product</span>
+                    </a>
+                </li>
+
 
                 <li class="submenu">
                     <a href="javascript:void(0);"><i data-feather="alert-octagon"></i>
