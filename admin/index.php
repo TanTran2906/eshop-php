@@ -60,7 +60,7 @@ $orders = $stmt->get_result();//[]
                                 <!-- <a class="me-3" href="product-details.html">
                                 <img src="assets/img/icons/eye.svg" alt="img">
                             </a> -->
-                                <a class="me-3" href="editproduct.html">
+                                <a class="me-3" href="editorder.php?order_id=<?php echo $order['order_id']; ?>">
                                     <img src="assets/img/icons/edit.svg" alt="img">
                                 </a>
                                 <a class="confirm-text" href="javascript:void(0);">

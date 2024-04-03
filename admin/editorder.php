@@ -8,35 +8,17 @@ if (!isset($_SESSION['admin_logged_in'])) {
 ?>
 
 <?php
-if (isset($_GET['product_id'])) {
-    $product_id = $_GET['product_id'];
-    $stmt = $conn->prepare("SELECT * FROM products WHERE product_id= ?");
-    $stmt->bind_param("i", $product_id);
+if (isset($_GET['order_id'])) {
+
+    $order_id = $_GET['order_id'];
+    $stmt = $conn->prepare("SELECT * FROM orders WHERE order_id =? ");
+    $stmt->bind_param('i', $order_id);
     $stmt->execute();
-    $products = $stmt->get_result();
 
-} else if (isset($_POST['edit_btn'])) {
-    $product_id = $_POST['product_id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $offer = $_POST['offer'];
-    $color = $_POST['color'];
-    $category = $_POST['category'];
-
-    $stmt = $conn->prepare("UPDATE products SET product_name = ? ,product_description= ? , product_price = ? ,product_special_offer = ? ,
-    product_color = ? ,product_category = ?  WHERE product_id = ? ");
-
-    $stmt->bind_param('ssssssi', $title, $description, $price, $offer, $color, $category, $product_id);
-
-    if ($stmt->execute()) {
-        header('location: products.php?edit_success_message=Product has been updated successfully!');
-    } else {
-        header('location: products.php?edit_failure_message=Error occured, try again!');
-    }
+    $order = $stmt->get_result(); //[]
 
 } else {
-    header('location: products.php');
+    header('location: index.php');
     exit;
 }
 ?>
@@ -49,64 +31,52 @@ if (isset($_GET['product_id'])) {
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>Product Edit</h4>
-                <h6>Update your product</h6>
+                <h4>Order Edit</h4>
+                <h6>Update your order</h6>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <form id="edit-form" method="POST" action="editproduct.php">
-                        <?php foreach ($products as $product) { ?>
-                            <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>" />
+                    <form id="edit-form" method="POST" action="editorder.php">
+                        <?php foreach ($order as $r) { ?>
+                            <input type="hidden" name="order_id" value="<?php echo $r['order_id']; ?>" />
                             <!-- Name  -->
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Title</label>
-                                    <input type="text" value="<?php echo $product['product_name']; ?>" name="title">
+                                    <label>Order Id: </label>
+                                    <p>
+                                        <?php echo $r['order_id']; ?>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Order Price: </label>
+                                    <p>
+                                        <?php echo $r['order_cost']; ?>
+                                    </p>
                                 </div>
                             </div>
                             <!-- Category -->
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Category</label>
-                                    <select class="select" name="category">
-                                        <option>DELL</option>
-                                        <option>ASUS</option>
-                                        <option>HP</option>
-                                        <option>ACER</option>
+                                    <label>Order Status: </label>
+                                    <select class="select" name="status">
+                                        <option>Not paid</option>
+                                        <option>Paid</option>
+                                        <option>Shipped</option>
+                                        <option>Delivered</option>
                                     </select>
                                 </div>
                             </div>
-                            <!-- Price -->
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Price</label>
-                                    <input type="text" name="price" value="<?php echo $product['product_price']; ?>">
-                                </div>
-                            </div>
-                            <!-- Color -->
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Color</label>
-                                    <input type="text" name="color" value="<?php echo $product['product_color']; ?>">
-                                </div>
-                            </div>
-                            <!-- Special offer/Sales -->
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Special offer/Sales</label>
-                                    <input type="number" name="offer"
-                                        value="<?php echo $product['product_special_offer']; ?>">
-                                </div>
-                            </div>
-                            <!-- Description -->
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea class="form-control"
-                                        name="description"><?php echo $product['product_description']; ?></textarea>
+                                    <label>Order Date: </label>
+                                    <p>
+                                        <?php echo $r['order_date']; ?>
+                                    </p>
                                 </div>
                             </div>
 
@@ -145,9 +115,8 @@ if (isset($_GET['product_id'])) {
                             </div>
                         </div> -->
                             <div class="col-lg-12">
-
                                 <button type="submit" name="edit_btn"><a class="btn btn-submit me-2">Update</a></button>
-                                <button><a href="productlist.php" class="btn btn-cancel">Cancel</a></button>
+                                <button><a href="index.php" class="btn btn-cancel">Cancel</a></button>
                             </div>
                         <?php } ?>
 

@@ -20,6 +20,31 @@ $products = $stmt->get_result();//[]
 <div class="page-wrapper">
     <div class="content">
 
+        <h2>Products</h2>
+        <?php if (isset($_GET['edit_success_message'])) { ?>
+            <p class="text-center" style="color: green;">
+                <?php echo $_GET['edit_success_message']; ?>
+            </p>
+        <?php } ?>
+
+        <?php if (isset($_GET['edit_failure_message'])) { ?>
+            <p class="text-center" style="color: red; ">
+                <?php echo $_GET['edit_failure_message']; ?>
+            </p>
+        <?php } ?>
+
+        <?php if (isset($_GET['deleted_successfully'])) { ?>
+            <p class="text-center" style="color: green;">
+                <?php echo $_GET['deleted_successfully']; ?>
+            </p>
+        <?php } ?>
+
+        <?php if (isset($_GET['deleted_failure'])) { ?>
+            <p class="text-center" style="color: red;">
+                <?php echo $_GET['deleted_failure']; ?>
+            </p>
+        <?php } ?>
+
         <div class="table-responsive">
             <table class="table datanew">
                 <thead>
@@ -71,7 +96,8 @@ $products = $stmt->get_result();//[]
                                 <a class="me-3" href="editproduct.php?product_id=<?php echo $product['product_id']; ?>">
                                     <img src="assets/img/icons/edit.svg" alt="img">
                                 </a>
-                                <a class="confirm-text" href="javascript:void(0);">
+                                <a class="confirm-text"
+                                    href="delete_product.php?product_id=<?php echo $product['product_id']; ?>">
                                     <img src="assets/img/icons/delete.svg" alt="img">
                                 </a>
                             </td>
